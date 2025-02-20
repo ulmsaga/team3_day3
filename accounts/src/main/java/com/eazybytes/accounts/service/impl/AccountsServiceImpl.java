@@ -2,6 +2,7 @@ package com.eazybytes.accounts.service.impl;
 
 import com.eazybytes.accounts.constants.AccountsConstants;
 import com.eazybytes.accounts.dto.AccountsDto;
+import com.eazybytes.accounts.dto.CardsDto;
 import com.eazybytes.accounts.dto.CustomerDto;
 import com.eazybytes.accounts.entity.Accounts;
 import com.eazybytes.accounts.entity.Customer;
@@ -12,6 +13,7 @@ import com.eazybytes.accounts.mapper.CustomerMapper;
 import com.eazybytes.accounts.repository.AccountsRepository;
 import com.eazybytes.accounts.repository.CustomerRepository;
 import com.eazybytes.accounts.service.IAccountsService;
+import com.eazybytes.accounts.service.client.CardsFeignClient;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,8 @@ public class AccountsServiceImpl  implements IAccountsService {
 
     private AccountsRepository accountsRepository;
     private CustomerRepository customerRepository;
+
+    private CardsFeignClient cardsFeignClient;
 
     /**
      * @param customerDto - CustomerDto Object
@@ -113,5 +117,8 @@ public class AccountsServiceImpl  implements IAccountsService {
         return true;
     }
 
-
+    @Override
+    public CardsDto fetchCardDetails(String mobileNumber) {
+        return cardsFeignClient.fetchCardDetails(mobileNumber).getBody();
+    }
 }

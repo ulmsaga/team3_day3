@@ -1,5 +1,6 @@
 package com.eazybytes.accounts.service;
 
+import com.eazybytes.accounts.dto.CardsDto;
 import com.eazybytes.accounts.dto.CustomerDto;
 
 public interface IAccountsService {
@@ -31,5 +32,5 @@ public interface IAccountsService {
      */
     boolean deleteAccount(String mobileNumber);
 
-
+    CardsDto fetchCardDetails(String mobileNumber);
 }
